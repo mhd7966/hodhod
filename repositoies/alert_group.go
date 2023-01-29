@@ -4,10 +4,10 @@ import (
 	"errors"
 	"strconv"
 
-	"github.com/abr-ooo/hodhod/connections"
-	"github.com/abr-ooo/hodhod/inputs"
-	"github.com/abr-ooo/hodhod/models"
-	"github.com/abr-ooo/hodhod/outputs"
+	"github.com/mhd7966/hodhod/connections"
+	"github.com/mhd7966/hodhod/inputs"
+	"github.com/mhd7966/hodhod/models"
+	"github.com/mhd7966/hodhod/outputs"
 	"gorm.io/gorm/clause"
 )
 

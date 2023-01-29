@@ -3,13 +3,13 @@ package main
 import (
 	"context"
 
-	"github.com/abr-ooo/hodhod/configs"
-	"github.com/abr-ooo/hodhod/connections"
-	_ "github.com/abr-ooo/hodhod/docs"
-	"github.com/abr-ooo/hodhod/jobs"
-	"github.com/abr-ooo/hodhod/log"
 	"github.com/getsentry/sentry-go"
 	"github.com/hibiken/asynq"
+	"github.com/mhd7966/hodhod/configs"
+	"github.com/mhd7966/hodhod/connections"
+	_ "github.com/mhd7966/hodhod/docs"
+	"github.com/mhd7966/hodhod/jobs"
+	"github.com/mhd7966/hodhod/log"
 	"github.com/sirupsen/logrus"
 )
 

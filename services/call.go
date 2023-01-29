@@ -1,9 +1,9 @@
 package services
 
 import (
-	"github.com/abr-ooo/hodhod/configs"
 	"github.com/kavenegar/kavenegar-go"
-	"github.com/abr-ooo/hodhod/log"
+	"github.com/mhd7966/hodhod/configs"
+	"github.com/mhd7966/hodhod/log"
 )
 
 func Call(messages string, number string) error {

@@ -1,9 +1,9 @@
 package routes
 
 import (
-	"github.com/abr-ooo/hodhod/controllers"
 	"github.com/gofiber/fiber/v2"
-	"github.com/abr-ooo/hodhod/log"
+	"github.com/mhd7966/hodhod/controllers"
+	"github.com/mhd7966/hodhod/log"
 )
 
 func HooRouter(app fiber.Router) {
@@ -14,5 +14,4 @@ func HooRouter(app fiber.Router) {
 
 	log.Log.Info("Hoo routes created :)")
 
-	
 }

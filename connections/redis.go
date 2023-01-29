@@ -1,8 +1,8 @@
 package connections
 
 import (
-	"github.com/abr-ooo/hodhod/configs"
 	"github.com/hibiken/asynq"
+	"github.com/mhd7966/hodhod/configs"
 )
 
 var RedisClient *asynq.Client

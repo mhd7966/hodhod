@@ -2,8 +2,9 @@ package connections
 
 import (
 	"fmt"
-	"github.com/abr-ooo/hodhod/configs"
-	"github.com/abr-ooo/hodhod/log"
+
+	"github.com/mhd7966/hodhod/configs"
+	"github.com/mhd7966/hodhod/log"
 	"github.com/sirupsen/logrus"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"

@@ -1,4 +1,4 @@
-module github.com/abr-ooo/hodhod
+module github.com/mhd7966/hodhod
 
 go 1.16
 

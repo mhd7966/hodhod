@@ -5,12 +5,12 @@ import (
 	"encoding/json"
 	"strconv"
 
-	"github.com/abr-ooo/hodhod/connections"
-	"github.com/abr-ooo/hodhod/constants"
-	"github.com/abr-ooo/hodhod/log"
-	"github.com/abr-ooo/hodhod/models"
-	"github.com/abr-ooo/hodhod/services"
 	"github.com/hibiken/asynq"
+	"github.com/mhd7966/hodhod/connections"
+	"github.com/mhd7966/hodhod/constants"
+	"github.com/mhd7966/hodhod/log"
+	"github.com/mhd7966/hodhod/models"
+	"github.com/mhd7966/hodhod/services"
 	"github.com/sirupsen/logrus"
 )
 

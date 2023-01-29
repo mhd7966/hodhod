@@ -1,8 +1,8 @@
 package repositories
 
 import (
-	"github.com/abr-ooo/hodhod/connections"
-	"github.com/abr-ooo/hodhod/models"
+	"github.com/mhd7966/hodhod/connections"
+	"github.com/mhd7966/hodhod/models"
 )
 
 func GetHooContact(userID int, alertID int, projectID int, service string) (*[]models.HooQuery, error) {

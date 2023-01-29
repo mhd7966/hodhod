@@ -5,15 +5,14 @@ import (
 	"encoding/json"
 	"strconv"
 
-	"github.com/abr-ooo/hodhod/configs"
-	"github.com/abr-ooo/hodhod/connections"
-	"github.com/abr-ooo/hodhod/constants"
-	"github.com/abr-ooo/hodhod/models"
-	"github.com/abr-ooo/hodhod/services"
 	"github.com/hibiken/asynq"
+	"github.com/mhd7966/hodhod/configs"
+	"github.com/mhd7966/hodhod/connections"
+	"github.com/mhd7966/hodhod/constants"
+	"github.com/mhd7966/hodhod/log"
+	"github.com/mhd7966/hodhod/models"
+	"github.com/mhd7966/hodhod/services"
 	"github.com/sirupsen/logrus"
-	"github.com/abr-ooo/hodhod/log"
-
 )
 
 const (
@@ -116,8 +115,6 @@ func HandleSMSTask(ctx context.Context, t *asynq.Task) error {
 	// 	log.Debug("Worker. Sending SMS Failed!\n", err)
 	// 	return err
 	// }
-
-	
 
 	for _, value := range p.LogList {
 		if err := tx.Model(&models.Log{}).Where("id = ?", value.ID).Update("status", constants.DONE).Error; err != nil {

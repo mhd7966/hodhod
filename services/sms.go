@@ -3,10 +3,10 @@ package services
 import (
 	"fmt"
 
-	"github.com/abr-ooo/hodhod/configs"
 	"github.com/imroc/req"
 	"github.com/kavenegar/kavenegar-go"
-	"github.com/abr-ooo/hodhod/log"
+	"github.com/mhd7966/hodhod/configs"
+	"github.com/mhd7966/hodhod/log"
 )
 
 func KavenegarSendSMS(message string, numbers []string) error {

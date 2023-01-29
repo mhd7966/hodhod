@@ -3,9 +3,9 @@ package repositories
 import (
 	"errors"
 
-	"github.com/abr-ooo/hodhod/connections"
-	"github.com/abr-ooo/hodhod/inputs"
-	"github.com/abr-ooo/hodhod/models"
+	"github.com/mhd7966/hodhod/connections"
+	"github.com/mhd7966/hodhod/inputs"
+	"github.com/mhd7966/hodhod/models"
 	// log "github.com/sirupsen/logrus"
 )
 

@@ -2,17 +2,17 @@ package controllers
 
 import (
 	"fmt"
-	"github.com/abr-ooo/hodhod/connections"
-	"github.com/abr-ooo/hodhod/constants"
-	"github.com/abr-ooo/hodhod/inputs"
-	"github.com/abr-ooo/hodhod/jobs"
-	"github.com/abr-ooo/hodhod/models"
-	"github.com/abr-ooo/hodhod/outputs"
-	repositories "github.com/abr-ooo/hodhod/repositoies"
-	"github.com/gofiber/fiber/v2"
-	"github.com/sirupsen/logrus"
-	"github.com/abr-ooo/hodhod/log"
 
+	"github.com/gofiber/fiber/v2"
+	"github.com/mhd7966/hodhod/connections"
+	"github.com/mhd7966/hodhod/constants"
+	"github.com/mhd7966/hodhod/inputs"
+	"github.com/mhd7966/hodhod/jobs"
+	"github.com/mhd7966/hodhod/log"
+	"github.com/mhd7966/hodhod/models"
+	"github.com/mhd7966/hodhod/outputs"
+	repositories "github.com/mhd7966/hodhod/repositoies"
+	"github.com/sirupsen/logrus"
 )
 
 var logBody models.Log

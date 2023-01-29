@@ -1,9 +1,9 @@
 package routes
 
 import (
-	"github.com/abr-ooo/hodhod/controllers"
-	"github.com/abr-ooo/hodhod/log"
 	"github.com/gofiber/fiber/v2"
+	"github.com/mhd7966/hodhod/controllers"
+	"github.com/mhd7966/hodhod/log"
 )
 
 func AlertGroupRouter(app fiber.Router) {

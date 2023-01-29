@@ -4,9 +4,9 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/abr-ooo/hodhod/connections"
-	"github.com/abr-ooo/hodhod/models"
-	"github.com/abr-ooo/hodhod/outputs"
+	"github.com/mhd7966/hodhod/connections"
+	"github.com/mhd7966/hodhod/models"
+	"github.com/mhd7966/hodhod/outputs"
 )
 
 func GetLog(logID int) (*models.Log, error) {

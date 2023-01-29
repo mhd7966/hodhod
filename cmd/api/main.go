@@ -1,15 +1,15 @@
 package main
 
 import (
-	"github.com/abr-ooo/hodhod/configs"
-	"github.com/abr-ooo/hodhod/connections"
-	"github.com/abr-ooo/hodhod/middleware"
-	_ "github.com/abr-ooo/hodhod/docs"
-	"github.com/abr-ooo/hodhod/log"
-	"github.com/abr-ooo/hodhod/routes"
 	sentryfiber "github.com/aldy505/sentry-fiber"
 	swagger "github.com/arsmn/fiber-swagger/v2"
 	"github.com/gofiber/fiber/v2"
+	"github.com/mhd7966/hodhod/configs"
+	"github.com/mhd7966/hodhod/connections"
+	_ "github.com/mhd7966/hodhod/docs"
+	"github.com/mhd7966/hodhod/log"
+	"github.com/mhd7966/hodhod/middleware"
+	"github.com/mhd7966/hodhod/routes"
 )
 
 //// @host localhost:3000 -> if set when you have domain you should set domain and then you want to test it localy -> change the host -> nazarim behtare

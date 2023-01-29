@@ -1,12 +1,11 @@
 package controllers
 
 import (
-	"github.com/abr-ooo/hodhod/models"
-	repositories "github.com/abr-ooo/hodhod/repositoies"
 	"github.com/gofiber/fiber/v2"
+	"github.com/mhd7966/hodhod/log"
+	"github.com/mhd7966/hodhod/models"
+	repositories "github.com/mhd7966/hodhod/repositoies"
 	"github.com/sirupsen/logrus"
-	"github.com/abr-ooo/hodhod/log"
-
 )
 
 // Log godoc
