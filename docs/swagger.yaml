@@ -1,0 +1,888 @@
+basePath: /v0
+definitions:
+  inputs.AlertBody:
+    properties:
+      message:
+        type: string
+      parent_id:
+        type: integer
+      severity:
+        type: integer
+    required:
+    - message
+    type: object
+  inputs.AlertGroupAlerts:
+    properties:
+      alert_ids:
+        items:
+          type: integer
+        type: array
+    required:
+    - alert_ids
+    type: object
+  inputs.AlertGroupBody:
+    properties:
+      alert_ids:
+        items:
+          type: integer
+        type: array
+      is_dafault:
+        default: false
+        type: boolean
+      name:
+        type: string
+    required:
+    - alert_ids
+    - name
+    type: object
+  inputs.AlertGroupUpdate:
+    properties:
+      name:
+        type: string
+    required:
+    - name
+    type: object
+  inputs.AlertUpdate:
+    properties:
+      message:
+        type: string
+      severity:
+        type: integer
+    type: object
+  inputs.ContactBody:
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      phone_number:
+        type: string
+    required:
+    - name
+    type: object
+  inputs.Hoo:
+    properties:
+      alert_id:
+        type: integer
+      project_id:
+        type: integer
+      service:
+        type: string
+      user_id:
+        type: integer
+      values:
+        items:
+          type: string
+        type: array
+    required:
+    - alert_id
+    - project_id
+    - service
+    - user_id
+    - values
+    type: object
+  inputs.NewContactProjectAlertGroup:
+    properties:
+      call:
+        default: false
+        type: boolean
+      contact_id:
+        type: integer
+      email:
+        default: false
+        type: boolean
+      severity:
+        type: integer
+      sms:
+        default: false
+        type: boolean
+      webhook:
+        default: false
+        type: boolean
+    required:
+    - call
+    - contact_id
+    - email
+    - severity
+    - sms
+    - webhook
+    type: object
+  inputs.ProjectAlertGroupBody:
+    properties:
+      name:
+        type: string
+      project_id:
+        type: integer
+      service:
+        type: string
+    required:
+    - name
+    - project_id
+    - service
+    type: object
+  inputs.UpdateContactProjectAlertGroup:
+    properties:
+      call:
+        default: false
+        type: boolean
+      email:
+        default: false
+        type: boolean
+      severity:
+        type: integer
+      sms:
+        default: false
+        type: boolean
+      webhook:
+        default: false
+        type: boolean
+    type: object
+  models.Response:
+    properties:
+      data:
+        type: object
+      message:
+        type: string
+      status:
+        type: string
+    type: object
+info:
+  contact:
+    email: fiber@swagger.io
+    name: API Support
+  description: I have no specific description
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Hod Hod API
+  version: "1.0"
+paths:
+  /alert:
+    get:
+      description: return alerts
+      operationId: get_alerts
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: get alerts
+      tags:
+      - Alert
+    post:
+      description: create alert
+      operationId: new_alert
+      parameters:
+      - description: alert
+        in: body
+        name: alertBody
+        required: true
+        schema:
+          $ref: '#/definitions/inputs.AlertBody'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: new alert
+      tags:
+      - Alert
+  /alert-group:
+    get:
+      description: return AlertGroups
+      operationId: get_user_alertGroups
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Response'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: get AlertGroups
+      tags:
+      - Alert Group
+    post:
+      description: new AlertGroup
+      operationId: new_AlertGroup
+      parameters:
+      - description: alert_group
+        in: body
+        name: alert-group
+        required: true
+        schema:
+          $ref: '#/definitions/inputs.AlertGroupBody'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: new AlertGroup
+      tags:
+      - Alert Group
+  /alert-group/{id}:
+    delete:
+      description: delete alertGroup by alertGroupID
+      operationId: delete_alert_group
+      parameters:
+      - description: alert_group_id
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: delete alertGroup
+      tags:
+      - Alert Group
+    get:
+      description: return AlertGroup
+      operationId: get_alert_Group
+      parameters:
+      - description: alert_grp_id
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Response'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: get AlertGroup
+      tags:
+      - Alert Group
+    put:
+      description: update AlertGroup
+      operationId: update_AlertGroup
+      parameters:
+      - description: alert_group_id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: alert_group
+        in: body
+        name: alert_group
+        required: true
+        schema:
+          $ref: '#/definitions/inputs.AlertGroupUpdate'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: update AlertGroup
+      tags:
+      - Alert Group
+  /alert-group/{id}/alert:
+    put:
+      description: update AlertGroupAlerts
+      operationId: update_AlertGroupAlerts
+      parameters:
+      - description: alert_group_id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: alerts
+        in: body
+        name: alerts
+        required: true
+        schema:
+          $ref: '#/definitions/inputs.AlertGroupAlerts'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: update AlertGroupAlerts
+      tags:
+      - Alert Group
+  /alert-group/{id}/project:
+    get:
+      description: return ProjectsAlertGroup
+      operationId: get_projects_of_AlertGroup
+      parameters:
+      - description: alert_group_id
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Response'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: get ProjectsAlertGroup
+      tags:
+      - Project Alert Group
+    post:
+      description: new ProjectAlertGroup
+      operationId: new_ProjectAlertGroup
+      parameters:
+      - description: alert_group_id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: project_alert_group
+        in: body
+        name: project
+        required: true
+        schema:
+          $ref: '#/definitions/inputs.ProjectAlertGroupBody'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: new ProjectAlertGroup
+      tags:
+      - Project Alert Group
+  /alert-group/{id}/project/{pid}:
+    delete:
+      description: delete ProjectAlertGroup by ProjectAlertGroupID
+      operationId: delete_project_alert_group
+      parameters:
+      - description: alert_group_id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: project_alert_group_id
+        in: path
+        name: pid
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: delete ProjectAlertGroup
+      tags:
+      - Project Alert Group
+    get:
+      description: return ProjectAlertGroup
+      operationId: get_ProjectAlertGroup
+      parameters:
+      - description: alert_group_id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: project_alert_group_id
+        in: path
+        name: pid
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Response'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: get ProjectAlertGroup
+      tags:
+      - Project Alert Group
+  /alert-group/{id}/project/{pid}/contact:
+    get:
+      description: return ContactProjectsAlertGroup
+      operationId: get_contacts_of_ProjectAlertGroup
+      parameters:
+      - description: alert_group_id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: project_alert_group_id
+        in: path
+        name: pid
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Response'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: get ContactProjectsAlertGroup
+      tags:
+      - Contact Project Alert Group
+    post:
+      description: new ContactProjectALertGroup
+      operationId: new_ContactProjectALertGroup
+      parameters:
+      - description: alert_group_id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: project_alert_group_id
+        in: path
+        name: pid
+        required: true
+        type: integer
+      - description: contact_project_alert_group
+        in: body
+        name: contact
+        required: true
+        schema:
+          $ref: '#/definitions/inputs.NewContactProjectAlertGroup'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: new ContactProjectALertGroup
+      tags:
+      - Contact Project Alert Group
+  /alert-group/{id}/project/{pid}/contact/{cpid}:
+    delete:
+      description: delete ContactProjectAlertGroup by ContactProjectAlertGroupID
+      operationId: delete_contactProjectAlertGroup
+      parameters:
+      - description: alert_group_id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: project_alert_group_id
+        in: path
+        name: pid
+        required: true
+        type: integer
+      - description: contact_project_alert_group_id
+        in: path
+        name: cpid
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: delete ContactProjectAlertGroup
+      tags:
+      - Contact Project Alert Group
+    get:
+      description: return ContactprojectAlertGroup
+      operationId: get_ContactprojectAlertGroup
+      parameters:
+      - description: alert_group_id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: project_alert_group_id
+        in: path
+        name: pid
+        required: true
+        type: integer
+      - description: contact_project_alert_group_id
+        in: path
+        name: cpid
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Response'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: get ContactprojectAlertGroup
+      tags:
+      - Contact Project Alert Group
+    put:
+      description: update ContactProjectAlertGroup
+      operationId: update_ContactProjectAlertGroup
+      parameters:
+      - description: alert_group_id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: project_alert_group_id
+        in: path
+        name: pid
+        required: true
+        type: integer
+      - description: contact_project_alert_group_id
+        in: path
+        name: cpid
+        required: true
+        type: integer
+      - description: contact_project_alert_group
+        in: body
+        name: contact
+        required: true
+        schema:
+          $ref: '#/definitions/inputs.UpdateContactProjectAlertGroup'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: update ContactProjectAlertGroup
+      tags:
+      - Contact Project Alert Group
+  /alert/{id}:
+    delete:
+      description: delete alert
+      operationId: delete_alert
+      parameters:
+      - description: alert_id
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: delete alert
+      tags:
+      - Alert
+    get:
+      description: return alert
+      operationId: get_alert
+      parameters:
+      - description: alert_id
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: get alert
+      tags:
+      - Alert
+    put:
+      description: update alert
+      operationId: update_alert
+      parameters:
+      - description: alert_id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: alert
+        in: body
+        name: alertBody
+        required: true
+        schema:
+          $ref: '#/definitions/inputs.AlertUpdate'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: update alert
+      tags:
+      - Alert
+  /contact:
+    get:
+      description: return contact info
+      operationId: get_user_contacts
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Response'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: get user contacts
+      tags:
+      - Contact
+    post:
+      description: new contact
+      operationId: new_contact
+      parameters:
+      - description: contact
+        in: body
+        name: contactBody
+        required: true
+        schema:
+          $ref: '#/definitions/inputs.ContactBody'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: new contact
+      tags:
+      - Contact
+  /contact/{id}:
+    delete:
+      description: delete contact by contactID
+      operationId: delete_contact
+      parameters:
+      - description: contact_id
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: delete contact
+      tags:
+      - Contact
+    get:
+      description: return contact info
+      operationId: get_contact
+      parameters:
+      - description: contact_id
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Response'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: get contact
+      tags:
+      - Contact
+    put:
+      description: update contact
+      operationId: update_contact
+      parameters:
+      - description: contact_id
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: contact
+        in: body
+        name: contactBody
+        required: true
+        schema:
+          $ref: '#/definitions/inputs.ContactBody'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: update contact
+      tags:
+      - Contact
+  /hoo:
+    post:
+      description: hoo
+      operationId: hoo
+      parameters:
+      - description: Hoo struct
+        in: body
+        name: hoo
+        required: true
+        schema:
+          $ref: '#/definitions/inputs.Hoo'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: hoo
+      tags:
+      - Hoo
+  /log:
+    get:
+      description: log
+      operationId: log
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Response'
+        "400":
+          description: Bad Request
+          schema:
+            type: json
+      security:
+      - ApiKeyAuth: []
+      summary: log
+      tags:
+      - Log
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

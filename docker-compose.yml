@@ -1,0 +1,74 @@
+version: "2.4"
+
+
+x-common-variables: &common-variables
+  - TZ=Asia/Tehran
+  - PG_HOST=postgres
+  - PG_PORT=5432
+  - PG_NAME=hodhod
+  - PG_USER=admin
+  - PG_PASS=admin
+  - SMS_DRIVER=1
+  - CALL_DRIVER=3
+  - KAVEH_TOKEN=724D61386A5578444E48436367495575484A6958773878387277487477627951484B5572316E7A4E5251453D
+  - KAVEH_NUMBER=1000596446
+  - SIGNAL_TOKEN=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjNmNDlhNmQ4MTI4MWVhZDkxYjUyZjg5ZjI5NTZhNWJjY2U1MjZhM2NiNGExZTExYjdlZGIzNGFiNDMzYzhmNDE2NzNkMWQ3MTNiYzdiZWIwIn0.eyJhdWQiOiIxIiwianRpIjoiM2Y0OWE2ZDgxMjgxZWFkOTFiNTJmODlmMjk1NmE1YmNjZTUyNmEzY2I0YTFlMTFiN2VkYjM0YWI0MzNjOGY0MTY3M2QxZDcxM2JjN2JlYjAiLCJpYXQiOjE2MjQzNjE1MjksIm5iZiI6MTYyNDM2MTUyOSwiZXhwIjoxNjU1ODk3NTI5LCJzdWIiOiI2OTQyIiwic2NvcGVzIjpbXX0.GwZ3Zx9tQf4rb7ugZNfISYXjqO61MhR2JXls9w1Gu4vysZb4RxGNWYiWPGuefGAwUroEyMb-rgQ0i4Znf2eYX4XqhcDghGQqKd0WKi0udK1oXktNoVy9K1bGw4-0QpX79OBsVXZbROxmnzahAkWkPEWxwab2_yGj2g8S_ao5VpT9YrLyy6yjy8QsPWywLcjVMxMUBhNeFp5yXgMMlNqiG6_4xf1p5LhE8208acXigydqtMvwEKKuuG3FltdvpUuqBjpph45Ik6OQOxewiDmIrxvZh6ZmJHLTD5UKxe1n-DW966JcBvpcx73jUamFApO6jnqSRrXNQKZh1HM1NFpW4hpZKJlWyucZz1RkKav0PKjOQPT5ZC7td0vJo3zr3zPkUTpc5zSWYBwWZK2zfxoAYfvW02gBhl1LyJMa2CguqPhVqbqsEW9yf_wSofchFZNmraZhi4QMjyRXzMUd6X5yGwYCusEr_2OSyAPp09q8DIMnxPtJQSwVDeEgXPOgj3SGzfuPxoqbaG_uST-5EaRktijR2dlMVbfUWJCWShyxw7OLoYiByInK8sbnKvB5PXVtdumlIDjJXl411S2pdKMpshY7MJbzT8oCp-UyZbDjIZd_ayoIkk0DhZt9dmoWyFDvru3MeLG2n6BjKx8xt47_qU78pcQVOzEt2k7htBbJako
+  - SIGNAL_NUMBER=5000439800
+  - REDIS_ADD=redis:6379
+  - LOG_LEVEL=debug
+  - LOG_OUTPUT_TYPE=stdout
+  - LOG_FILE_Add=/log.txt
+  - AUTH_HOST=https://api.abr.ooo/v0/user
+  - SENTRY_DSN=https://813048dea1454d80a7ff62c6456a1d7e@sentry.abr.ooo/3
+  - SENTRY_LEVEL=error
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    pid: "host"
+    environment: *common-variables
+    depends_on:
+      - postgres
+      - redis
+    ports:
+      - "3000:3000"
+
+  worker:
+    image: hodhod:worker
+    build:
+      context: .
+      args:
+        BUILD_PATH: ./cmd/worker
+    restart: always
+    environment: *common-variables
+    depends_on:
+      - postgres
+      - redis
+
+  postgres:
+    image: postgres:alpine3.14
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=hodhhod
+    volumes:
+      - ~/dockerv/postgres:/var/lib/postgresql/data
+
+  redis:
+    image: redis:alpine3.14
+    ports:
+      - "6379:6379"
+    volumes:
+      - ~/dockerv/redis:/data
+
+  asynqmon:
+    image: hibiken/asynqmon
+    restart: always
+    command: --redis-addr=redis:6379
+    ports:
+      - "10004:8080"
